@@ -281,6 +281,20 @@
 
 (use-package haskell-mode)
 
+;; c++ custom style
+(c-add-style "cpp-custom-style" 
+	     '("stroustrup"
+	       (c-basic-offset . 4)))
+
+(defun my/c++-mode-hook ()
+  (interactive)
+  (message "Running my/c++-mode-hook")
+  (c-set-style "cpp-custom-style")
+  (auto-fill-mode)         
+  (c-toggle-hungry-state t))
+
+(add-hook 'c++-mode-hook 'my/c++-mode-hook)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
