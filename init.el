@@ -223,6 +223,10 @@
   :commands R
   )
 
+;; (use-package flycheck
+;;   :hook (python-mode . flycheck-mode)
+;;   )
+
 (use-package elpy
   :hook ((python-mode . elpy-mode)
 	 (python-mode . visual-line-mode))
@@ -238,15 +242,9 @@
   ;; 	python-shell-prompt-detect-failure-warning nil)
   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
   ;; 	       "jupyter")
+  ;; ;; disable flymake (use flycheck)
+  ;; (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))  
   )
-
-;; (use-package flycheck
-;;   :after elpy
-;;   :hook (elpy-mode . flycheck-mode)
-;;   :config
-;;   ;; disable flymake (use flycheck)
-;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-;;   )
 
 (use-package projectile
   :hook (python-mode . projectile-mode)
