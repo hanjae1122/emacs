@@ -346,8 +346,9 @@
   )
 
 (use-package projectile
-  :hook (python-mode . projectile-mode)
+  :hook (prog-mode . projectile-mode)
   :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
 
 (use-package magit 
