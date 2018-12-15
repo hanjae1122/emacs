@@ -59,6 +59,7 @@
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 
+
 ;; Key bindings
 (defun split-and-follow-horizontally ()
   (interactive)
@@ -76,8 +77,43 @@
 
 
 ;; Major modes
+;; for useful autocompletion
 (ido-mode)
 (ido-everywhere)
+;; . is the name of directory
+(setq ido-show-dot-for-dired t)
+ 
+;; move around with shift+arrow
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
+;; c++ custom style
+(c-add-style "cpp-custom-style" 
+	     '("stroustrup"
+	       (c-basic-offset . 4)))
+
+(defun my/c++-mode-hook ()
+  (interactive)
+  (message "Running my/c++-mode-hook")
+  (c-set-style "cpp-custom-style")
+  (auto-fill-mode)         
+  (c-toggle-hungry-state t))
+
+(add-hook 'c++-mode-hook 'my/c++-mode-hook)
+
+;; c custom style
+(c-add-style "c-custom-style" 
+	     '("stroustrup"
+	       (c-basic-offset . 4)))
+
+(defun my/c-mode-hook ()
+  (interactive)
+  (message "Running my/c-mode-hook")
+  (c-set-style "c-custom-style")
+  (auto-fill-mode)         
+  (c-toggle-hungry-state t))
+
+(add-hook 'c-mode-hook 'my/c-mode-hook)
 
 
 ;; ;; Package install settings
@@ -286,40 +322,16 @@
 
 (use-package haskell-mode)
 
-;; c++ custom style
-(c-add-style "cpp-custom-style" 
-	     '("stroustrup"
-	       (c-basic-offset . 4)))
-
-(defun my/c++-mode-hook ()
-  (interactive)
-  (message "Running my/c++-mode-hook")
-  (c-set-style "cpp-custom-style")
-  (auto-fill-mode)         
-  (c-toggle-hungry-state t))
-
-(add-hook 'c++-mode-hook 'my/c++-mode-hook)
-
-;; c custom style
-(c-add-style "c-custom-style" 
-	     '("stroustrup"
-	       (c-basic-offset . 4)))
-
-(defun my/c-mode-hook ()
-  (interactive)
-  (message "Running my/c-mode-hook")
-  (c-set-style "c-custom-style")
-  (auto-fill-mode)         
-  (c-toggle-hungry-state t))
-
-(add-hook 'c-mode-hook 'my/c-mode-hook)
-
-(add-hook 'c++-mode-hook 'my/c++-mode-hook)
 
 (use-package nyan-mode
   :config
   (nyan-mode))
 
+(use-package rainbow-delimiters
+  :hook ((prog-mode . rainbow-delimiters-mode))
+  )
+
+  
 ;; ====================================================================================
 ;; ====================================================================================
 ;; ====================================================================================
@@ -330,7 +342,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package))))
+    (rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

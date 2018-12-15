@@ -4,7 +4,10 @@ themes
 packages
 .emacs.desktop
 .emacs.desktop.lock
+
+# Package-specific
 projectile-bookmarks.eld
+ido.last
 
 # Created by https://www.gitignore.io/api/macos,emacs
 # Edit at https://www.gitignore.io/?templates=macos,emacs
