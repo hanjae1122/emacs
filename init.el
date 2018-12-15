@@ -75,6 +75,11 @@
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
 
+;; Major modes
+(ido-mode)
+(ido-everywhere)
+
+
 ;; ;; Package install settings
 ;; ;; add additional trusted CAs to allow gnu, melpa
 ;; (require 'gnutls)
