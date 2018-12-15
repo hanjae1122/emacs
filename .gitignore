@@ -4,6 +4,7 @@ themes
 packages
 .emacs.desktop
 .emacs.desktop.lock
+*.org
 
 # Package-specific
 projectile-bookmarks.eld
