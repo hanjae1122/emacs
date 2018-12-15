@@ -60,7 +60,7 @@
 (delete-selection-mode t)
 
 
-;; Key bindings
+;; Custom key bindings
 (defun split-and-follow-horizontally ()
   (interactive)
   (split-window-below)
@@ -76,16 +76,84 @@
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
 
-;; Major modes
+;; Package install settings
+;; ;; add additional trusted CAs to allow gnu, melpa
+;; (require 'gnutls)
+;; (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem")
+
+;; Set up archives
+(require 'package)
+(setq package-enable-at-startup nil)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+			 ("org" . "http://orgmode.org/elpa/")
+			 ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
+			 ))
+;; load path for packages download in raw form
+(add-to-list 'load-path "~/.emacs.d/raw/")
+;; install packages to .emacs.d/packages
+(setq package-user-dir (expand-file-name "packages" user-emacs-directory))
+; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
+(package-initialize)
+
+;; Use-package
+;; install and require use-package if not already
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
+;; indicate package loading activity as a message
+(setq use-package-verbose t)
+;; always install package if not already
+(setq use-package-always-ensure t)
+
+;; Built-in modes
 ;; for useful autocompletion
-(ido-mode)
-(ido-everywhere)
-;; . is the name of directory
-(setq ido-show-dot-for-dired t)
+(use-package ido
+  :config
+  (ido-mode)
+  (ido-everywhere)
+  ;; . is the name of directory
+  (setq ido-show-dot-for-dired t))
  
 ;; move around with shift+arrow
-(when (fboundp 'windmove-default-keybindings)
+(use-package windmove
+  :config
   (windmove-default-keybindings))
+
+;; hideshow (builtin)
+(use-package hideshow
+  :hook ((c-mode . hs-minor-mode)
+	 (emacs-lisp-mode . hs-minor-mode)
+	 (java-mode . hs-minor-mode)
+	 (lisp-mode . hs-minor-mode)
+	 (perl-mode . hs-minor-mode)
+	 (sh-mode . hs-minor-mode)
+	 (python-mode . hs-minor-mode))
+
+  :config
+  (defun toggle-selective-display (column)
+      (interactive "P")
+      (set-selective-display
+       (or column
+           (unless selective-display
+             (1+ (current-column))))))
+
+  (defun toggle-hiding (column)
+    (interactive "P")
+    (if hs-minor-mode
+        (if (condition-case nil
+                (hs-toggle-hiding)
+              (error t))
+            (hs-show-all))
+      (toggle-selective-display column)))
+  
+  (global-set-key (kbd "C-+") 'toggle-hiding)
+  (global-set-key (kbd "C-\\") 'toggle-selective-display)
+  )
 
 ;; c++ custom style
 (c-add-style "cpp-custom-style" 
@@ -115,41 +183,6 @@
 
 (add-hook 'c-mode-hook 'my/c-mode-hook)
 
-
-;; ;; Package install settings
-;; ;; add additional trusted CAs to allow gnu, melpa
-;; (require 'gnutls)
-;; (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem")
-
-;; Set up archives
-(require 'package)
-(setq package-enable-at-startup nil)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-			 ("org" . "http://orgmode.org/elpa/")
-			 ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
-			 ))
-;; load path for packages download in raw form
-(add-to-list 'load-path "~/.emacs.d/raw/")
-;; install packages to .emacs.d/packages
-(setq package-user-dir (expand-file-name "packages" user-emacs-directory))
-; fetch the list of packages available 
-(unless package-archive-contents
-  (package-refresh-contents))
-(package-initialize)
-
-
-;; Use-package
-;; install and require use-package if not already
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile
-  (require 'use-package))
-;; indicate package loading activity as a message
-(setq use-package-verbose t)
-;; always install package if not already
-(setq use-package-always-ensure t)
 
 ;; Themes
 (use-package dracula-theme
@@ -322,11 +355,6 @@
 
 (use-package haskell-mode)
 
-
-(use-package nyan-mode
-  :config
-  (nyan-mode))
-
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode))
   )
@@ -341,7 +369,29 @@
 (use-package undo-tree
   :config
   (global-undo-tree-mode))
-  
+
+(use-package dimmer
+  :config
+  (dimmer-mode))
+(setq ns-right-option-modifier 'super)
+
+(use-package crux
+  :config
+  (global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
+  (global-set-key (kbd "C-c o") #'crux-open-with)
+  (global-set-key [(shift return)] #'crux-smart-open-line)
+  (global-set-key (kbd "C-<backspace>") #'crux-kill-line-backwards)
+  (global-set-key [remap kill-whole-line] #'crux-smart-kill-line)
+  (global-set-key (kbd "C-c n") #'crux-cleanup-buffer-or-region))
+
+;; (use-package browse-kill-ring
+;;   :config
+;;   (browse-kill-ring-default-keybindings))
+
+(use-package popup-kill-ring
+  :config
+  (global-set-key "\M-y" 'popup-kill-ring))
+
 ;; ====================================================================================
 ;; ====================================================================================
 ;; ====================================================================================
@@ -352,7 +402,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package))))
+    (popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
