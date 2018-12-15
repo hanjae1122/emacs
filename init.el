@@ -295,6 +295,29 @@
 
 (add-hook 'c++-mode-hook 'my/c++-mode-hook)
 
+;; c custom style
+(c-add-style "c-custom-style" 
+	     '("stroustrup"
+	       (c-basic-offset . 4)))
+
+(defun my/c-mode-hook ()
+  (interactive)
+  (message "Running my/c-mode-hook")
+  (c-set-style "c-custom-style")
+  (auto-fill-mode)         
+  (c-toggle-hungry-state t))
+
+(add-hook 'c-mode-hook 'my/c-mode-hook)
+
+(add-hook 'c++-mode-hook 'my/c++-mode-hook)
+
+(use-package nyan-mode
+  :config
+  (nyan-mode))
+
+;; ====================================================================================
+;; ====================================================================================
+;; ====================================================================================
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -302,7 +325,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package))))
+    (nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
