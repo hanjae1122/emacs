@@ -331,6 +331,16 @@
   :hook ((prog-mode . rainbow-delimiters-mode))
   )
 
+(use-package linum-relative
+  :config
+  (linum-on)
+  (linum-relative-toggle)
+  ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
+  (setq linum-relative-backend 'display-line-numbers-mode))
+
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode))
   
 ;; ====================================================================================
 ;; ====================================================================================
@@ -342,7 +352,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package))))
+    (linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
