@@ -164,8 +164,10 @@
   (interactive)
   (message "Running my/c++-mode-hook")
   (c-set-style "cpp-custom-style")
-  (auto-fill-mode)         
-  (c-toggle-hungry-state t))
+  (auto-fill-mode)
+  (c-toggle-hungry-state t)
+  ;; properly indent switch-statement
+  (c-set-offset 'case-label '+))
 
 (add-hook 'c++-mode-hook 'my/c++-mode-hook)
 
