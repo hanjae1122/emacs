@@ -429,11 +429,6 @@
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
   ;; auto-update commands after Emacs has been idle for 60 seconds
   (smex-auto-update 60)
-  ;; add smex-update to after-load-functions.
-  ;; (defun smex-update-after-load ()
-  ;;   (when (boundp 'smex-cache)
-  ;;     (smex-update)))
-  ;; (add-hook 'after-load-functions 'smex-update-after-load)
   )
 
 (use-package dashboard
@@ -454,14 +449,20 @@
     ;; add another newline
     (sp-with-modes '(c-mode c++-mode)
       (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-      ;; bug with '' in c-mode
-      (setq sp-escape-quotes-after-insert nil)
       )
+    ;; bug with '' in c-mode
+    (setq sp-escape-quotes-after-insert nil)
     )
 
 ;; (use-package beacon
 ;;   :config
 ;;   (beacon-mode 1))
+
+;; enable move between sub-words
+;; only for haskell for now
+(use-package haskell-mode
+  :hook (haskell-mode . subword-mode))
+  
 
 ;; ====================================================================================
 ;; ====================================================================================
@@ -481,7 +482,7 @@
  '(nyan-mode t)
  '(package-selected-packages
    (quote
-    (beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
