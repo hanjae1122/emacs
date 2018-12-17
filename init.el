@@ -388,9 +388,8 @@
   )
 
 (use-package linum-relative
+  :hook (prog-mode . linum-relative-mode)
   :config
-  (linum-on)
-  (linum-relative-toggle)
   ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
   (setq linum-relative-backend 'display-line-numbers-mode))
 
