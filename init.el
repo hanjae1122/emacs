@@ -112,12 +112,12 @@
 
 ;; Built-in modes
 ;; for useful autocompletion
-(use-package ido
-  :config
-  (ido-mode)
-  (ido-everywhere)
-  ;; . is the name of directory
-  (setq ido-show-dot-for-dired t))
+;; (use-package ido
+;;   :config
+;;   (ido-mode)
+;;   (ido-everywhere)
+;;   ;; . is the name of directory
+;;   (setq ido-show-dot-for-dired t))
  
 ;; move around with shift+arrow
 (use-package windmove
@@ -400,6 +400,7 @@
 (use-package dimmer
   :config
   (dimmer-mode))
+;; bind right alt key to super
 (setq ns-right-option-modifier 'super)
 
 (use-package crux
@@ -420,15 +421,15 @@
   :config
   (global-set-key "\M-y" 'popup-kill-ring))
 
-(use-package smex
-  :config
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-  ;; This is your old M-x.
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-  ;; auto-update commands after Emacs has been idle for 60 seconds
-  (smex-auto-update 60)
-  )
+;; (use-package smex
+;;   :config
+;;   (global-set-key (kbd "M-x") 'smex)
+;;   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;;   ;; This is your old M-x.
+;;   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+;;   ;; auto-update commands after Emacs has been idle for 60 seconds
+;;   (smex-auto-update 60)
+;;   )
 
 (use-package dashboard
   :config
@@ -463,6 +464,13 @@
   :hook (haskell-mode . subword-mode))
   
 
+(use-package ivy
+  :config
+  (ivy-mode t)
+  ;; use ivy in magit
+  (setq magit-completing-read-function 'ivy-completing-read)
+  )
+
 ;; ====================================================================================
 ;; ====================================================================================
 ;; ====================================================================================
@@ -481,7 +489,7 @@
  '(nyan-mode t)
  '(package-selected-packages
    (quote
-    (hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
