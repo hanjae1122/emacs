@@ -64,14 +64,12 @@
 (defun split-and-follow-horizontally ()
   (interactive)
   (split-window-below)
-  (balance-windows)
   (other-window 1))
 (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
 
 (defun split-and-follow-vertically ()
   (interactive)
   (split-window-right)
-  (balance-windows)
   (other-window 1))
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
@@ -112,13 +110,6 @@
 
 ;; Built-in modes
 ;; for useful autocompletion
-;; (use-package ido
-;;   :config
-;;   (ido-mode)
-;;   (ido-everywhere)
-;;   ;; . is the name of directory
-;;   (setq ido-show-dot-for-dired t))
- 
 ;; move around with shift+arrow
 (use-package windmove
   :config
@@ -223,6 +214,8 @@
   :bind ("C-x o" . 'ace-window)
   )
 
+
+;; Packages
 ;; get environment variables such as $PATH from the shell (only for unix systems)
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
@@ -381,8 +374,6 @@
   :hook (image-mode . eimp-mode)
   )
 
-(use-package haskell-mode)
-
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode))
   )
@@ -413,23 +404,11 @@
   ;; (global-set-key [remap kill-whole-line] #'crux-kill-whole-line)
   (global-set-key (kbd "C-c n") #'crux-cleanup-buffer-or-region))
 
-;; (use-package browse-kill-ring
-;;   :config
-;;   (browse-kill-ring-default-keybindings))
 
 (use-package popup-kill-ring
   :config
   (global-set-key "\M-y" 'popup-kill-ring))
 
-;; (use-package smex
-;;   :config
-;;   (global-set-key (kbd "M-x") 'smex)
-;;   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;;   ;; This is your old M-x.
-;;   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-;;   ;; auto-update commands after Emacs has been idle for 60 seconds
-;;   (smex-auto-update 60)
-;;   )
 
 (use-package dashboard
   :config
@@ -440,6 +419,8 @@
                         (projects . 5)
                         (agenda . 5)
                         (registers . 5))))
+
+(use-package company)
 
 (use-package smartparens-config
     :ensure smartparens
@@ -461,8 +442,8 @@
 ;; enable move between sub-words
 ;; only for haskell for now
 (use-package haskell-mode
-  :hook (haskell-mode . subword-mode))
-  
+  :hook (haskell-mode . subword-mode)	 
+  )
 
 (use-package ivy
   :config
@@ -489,7 +470,7 @@
  '(nyan-mode t)
  '(package-selected-packages
    (quote
-    (counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
