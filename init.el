@@ -91,7 +91,7 @@
 (add-to-list 'load-path "~/.emacs.d/raw/")
 ;; install packages to .emacs.d/packages
 (setq package-user-dir (expand-file-name "packages" user-emacs-directory))
-; fetch the list of packages available 
+; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
 (package-initialize)
@@ -141,13 +141,13 @@
               (error t))
             (hs-show-all))
       (toggle-selective-display column)))
-  
+
   (global-set-key (kbd "C-+") 'toggle-hiding)
   (global-set-key (kbd "C-\\") 'toggle-selective-display)
   )
 
 ;; c++ custom style
-(c-add-style "cpp-custom-style" 
+(c-add-style "cpp-custom-style"
 	     '("stroustrup"
 	       (c-basic-offset . 4)))
 
@@ -163,7 +163,7 @@
 (add-hook 'c++-mode-hook 'my/c++-mode-hook)
 
 ;; c custom style
-(c-add-style "c-custom-style" 
+(c-add-style "c-custom-style"
 	     '("stroustrup"
 	       (c-basic-offset . 4)))
 
@@ -171,7 +171,7 @@
   (interactive)
   (message "Running my/c-mode-hook")
   (c-set-style "c-custom-style")
-  (auto-fill-mode)         
+  (auto-fill-mode)
   (c-toggle-hungry-state t))
 
 (add-hook 'c-mode-hook 'my/c-mode-hook)
@@ -253,7 +253,7 @@
 
   ;; ;; export to pdf in color
   (add-to-list 'org-latex-packages-alist '("" "color"))
-  
+
   ;; ;; settings for minted
   (add-to-list 'org-latex-packages-alist '("" "minted"))
   ;; (add-to-list 'org-latex-packages-alist '("" "minted" nil))
@@ -262,17 +262,17 @@
   	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
   	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
   	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-  
+
   ;; ;; minted conflicts with latex preview with dvipng so convert to imagemagick
   (setq org-latex-create-formula-image-program 'imagemagick)
   ;; (setq org-latex-create-formula-image-program 'dvipng)
 
   ;; src_block exporting
   ;; (setq org-src-preserve-indentation t)
-  (setq org-src-preserve-indentation nil 
+  (setq org-src-preserve-indentation nil
 	org-edit-src-content-indentation 0)
   ;; (setq indent-tabs-mode nil)
-  
+
   ;; open folders in dired
   (add-to-list 'org-file-apps '(directory . emacs))
   ;; "Switch entry to DONE when all subentries are done, to TODO otherwise."
@@ -284,7 +284,7 @@
   (setq org-toggle-inline-images t)
   ;; use tab natively in source blocks
   (setq org-src-tab-acts-natively t)
-  ;; place captions below 
+  ;; place captions below
   (setq org-latex-caption-above nil)
   ;; export apostrophes correctly
   (setq org-export-with-smart-quotes t)
@@ -337,7 +337,7 @@
   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
   ;; 	       "jupyter")
   ;; ;; disable flymake (use flycheck)
-  ;; (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))  
+  ;; (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   )
 
 (use-package projectile
@@ -346,7 +346,7 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
 
-(use-package magit 
+(use-package magit
   :bind (("C-x g" . 'magit-status)
 	 ("C-x M-g" . 'magit-dispatch-popup))
   )
@@ -442,15 +442,24 @@
 ;; enable move between sub-words
 ;; only for haskell for now
 (use-package haskell-mode
-  :hook (haskell-mode . subword-mode)	 
+  :hook (haskell-mode . subword-mode)
   )
 
 (use-package ivy
   :config
   (ivy-mode t)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
   ;; use ivy in magit
   (setq magit-completing-read-function 'ivy-completing-read)
   )
+
+(use-package swiper
+  :config
+  (defun bind-swiper-key ()
+    (local-set-key (kbd "C-s") 'swiper))
+  (add-hook 'dired-mode-hook 'bind-swiper-key)
+  (add-hook 'prog-mode-hook 'bind-swiper-key))
 
 ;; ====================================================================================
 ;; ====================================================================================
@@ -470,7 +479,7 @@
  '(nyan-mode t)
  '(package-selected-packages
    (quote
-    (company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
