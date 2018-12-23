@@ -84,7 +84,7 @@
 (setq package-enable-at-startup nil)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
-			 ("org" . "http://orgmode.org/elpa/")
+			 ;; ("org" . "http://orgmode.org/elpa/")
 			 ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
 			 ))
 ;; load path for packages download in raw form
