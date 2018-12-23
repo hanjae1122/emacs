@@ -289,43 +289,41 @@
   ;;    (add-to-list 'org-export-filter-headline-functions
   ;;                 'my-html-filter-headline-yesdot)))
   
-  ;; set export backends (added jekyll and beamer)
-  ;; (setq org-export-backends (quote (ascii beamer html icalendar latex odt jekyll)))
+  ;; set export backends (added beamer)
+  (setq org-export-backends (quote (ascii beamer html icalendar latex odt)))
+  )
 
-  ;; jekyll blogging
-  (setq org-publish-project-alist
-      '(;; publishes all the Org-mode files to HTML
-	("blog-posts"
-         ;; Path to your org files.
-         :base-directory "~/hanjae1122.github.io/org"
-         :base-extension "org"
+;; package for exporting org to markdown
+(use-package ox-gfm
+  :after org)
 
-         ;; Path to your Jekyll project.
-         :publishing-directory "~/hanjae1122.github.io/_posts"
-	 :recursive t
-         :publishing-function org-jekyll-publish-to-html
-         ;;:headline-levels 4
-	 ;;:auto-preamble t
-         ;; :html-extension "html"
-         ;;:body-only t ;; Only export section between <body> </body>
-	 )
+;; Octopress with jekyll
+(use-package org-octopress
+  :after org
+  :load-path "~/.emacs.d/raw/org-octopress/"
+  :config
+  (setq org-octopress-directory-top       "~/hanjae1122.github.io")
+  (setq org-octopress-directory-posts     "~/hanjae1122.github.io/_posts")
+  (setq org-octopress-directory-org-top   "~/hanjae1122.github.io/org")
+  (setq org-octopress-directory-org-posts "~/hanjae1122.github.io/org/_posts")
+  (setq org-octopress-setup-file          "~/Org/ox_jekyll_setupfile.org")
 
-	;; copies files & folders from :base-directory to
-	;; :publishing-directory without changing them
-	("blog-statics"
-	 :base-directory "~/hanjae1122.github.io/org"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
-         :publishing-directory "~/hanjae1122.github.io/_posts"
-         :recursive t
-         :publishing-function org-publish-attachment
-	 )
+  ;; need to change org links to match website structure
+  ;; we use permalink in _config.yml to fix path depth and use relative paths
+  
+  ;; another way is to add custom links but this disables ATTR_HTML, texted links etc
+  ;; ;; checkout https://www.mfoot.com/blog/2015/11/17/using-org-mode-to-write-jekyll-blogs/
+  ;; ;; and https://stackoverflow.com/questions/14684263/how-to-org-mode-image-absolute-path-of-export-html
+  ;;  (defun org-custom-link-img-follow (path)
+  ;;    (org-open-file-with-emacs
+  ;;     (format "../files/image/%s" path)))
 
-	;; publishes all with one command
-	("blog-publish"
-	 :components ("blog-posts" "blog-statics")
-	 )
-	)
-      )
+  ;;  (defun org-custom-link-img-export (path desc format)
+  ;;    (cond
+  ;;     ((eq format 'html)
+  ;;      (format "<img src=\"/files/image/%s\" alt=\"%s\"/>" path desc))))
+
+  ;;  (org-add-link-type "img" 'org-custom-link-img-follow 'org-custom-link-img-export)
   )
 
 (use-package org-pdfview
@@ -334,24 +332,6 @@
   (add-to-list 'org-file-apps 
                '("\\.pdf\\'" . (lambda (file link)
 				 (org-pdfview-open link)))))
-
-;; octopress for blogging with Jekyll
-;; (use-package org-octopress
-;;   :config
-;;   (setq org-octopress-directory-top       "~/testBlog")
-;;   (setq org-octopress-directory-posts     "~/testBlog/_posts")
-;;   (setq org-octopress-directory-org-top   "~/testBlog")
-;;   (setq org-octopress-directory-org-posts "~/testBlog/org")
-;;   (setq org-octopress-setup-file          "~/org-sty/setupfile.org")
-;;   )
-
-;; Jekyll
-;; (require 'ox-publish)
-;; (require 'ox-jekyll)
-
-;; package for exporting org to markdown
-(use-package ox-gfm
-  :after org)
 
 
 ;; Programming
@@ -434,9 +414,10 @@
 (use-package dimmer
   :config
   (dimmer-mode))
+
+
 ;; bind right alt key to super
 (setq ns-right-option-modifier 'super)
-
 (use-package crux
   :config
   (global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
@@ -515,7 +496,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" default)))
+    ("f8cf128fa0ef7e61b5546d12bb8ea1584c80ac313db38867b6e774d1d38c73db" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" default)))
  '(fci-rule-color "#383a42")
  '(jdee-db-active-breakpoint-face-colors (cons "#f0f0f0" "#4078f2"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#f0f0f0" "#50a14f"))
@@ -523,7 +504,7 @@
  '(nyan-mode t)
  '(package-selected-packages
    (quote
-    (org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (smartparens-config org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
