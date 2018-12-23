@@ -465,22 +465,23 @@
 
 (use-package company)
 
-(use-package smartparens-config
-    :ensure smartparens
-    :config
-    (show-smartparens-global-mode t)
-    ;; when you press RET, the curly braces automatically
-    ;; add another newline
-    (sp-with-modes '(c-mode c++-mode)
-      (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-      )
-    ;; bug with '' in c-mode
-    (setq sp-escape-quotes-after-insert nil)
-    )
+(use-package smartparens
+  :config
+  ;; Use the base configuration
+  (require 'smartparens-config nil t)
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
+  ;; when you press RET, the curly braces automatically
+  ;; add another newline
+  (sp-with-modes '(c-mode c++-mode)
+    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
+  ;; bug with '' in c-mode
+  (setq sp-escape-quotes-after-insert nil))
 
 ;; (use-package beacon
 ;;   :config
 ;;   (beacon-mode 1))
+
 
 ;; enable move between sub-words
 ;; only for haskell for now
