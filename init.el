@@ -275,6 +275,7 @@
 
   ;; open folders in dired
   (add-to-list 'org-file-apps '(directory . emacs))
+  
   ;; "Switch entry to DONE when all subentries are done, to TODO otherwise."
   (defun org-summary-todo (n-done n-not-done)
     (let (org-log-done org-log-states)   ; turn off logging
@@ -304,7 +305,66 @@
   ;; '(progn
   ;;    (add-to-list 'org-export-filter-headline-functions
   ;;                 'my-html-filter-headline-yesdot)))
+  
+  ;; set export backends (added jekyll and beamer)
+  ;; (setq org-export-backends (quote (ascii beamer html icalendar latex odt jekyll)))
+
+  ;; jekyll blogging
+  (setq org-publish-project-alist
+      '(;; publishes all the Org-mode files to HTML
+	("blog-posts"
+         ;; Path to your org files.
+         :base-directory "~/hanjae1122.github.io/org"
+         :base-extension "org"
+
+         ;; Path to your Jekyll project.
+         :publishing-directory "~/hanjae1122.github.io/_posts"
+	 :recursive t
+         :publishing-function org-jekyll-publish-to-html
+         ;;:headline-levels 4
+	 ;;:auto-preamble t
+         ;; :html-extension "html"
+         ;;:body-only t ;; Only export section between <body> </body>
+	 )
+
+	;; copies files & folders from :base-directory to
+	;; :publishing-directory without changing them
+	("blog-statics"
+	 :base-directory "~/hanjae1122.github.io/org"
+         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
+         :publishing-directory "~/hanjae1122.github.io/_posts"
+         :recursive t
+         :publishing-function org-publish-attachment
+	 )
+
+	;; publishes all with one command
+	("blog-publish"
+	 :components ("blog-posts" "blog-statics")
+	 )
+	)
+      )
   )
+
+(use-package org-pdfview
+  :after (:all org pdf-tools)
+  :config
+  (add-to-list 'org-file-apps 
+               '("\\.pdf\\'" . (lambda (file link)
+				 (org-pdfview-open link)))))
+
+;; octopress for blogging with Jekyll
+;; (use-package org-octopress
+;;   :config
+;;   (setq org-octopress-directory-top       "~/testBlog")
+;;   (setq org-octopress-directory-posts     "~/testBlog/_posts")
+;;   (setq org-octopress-directory-org-top   "~/testBlog")
+;;   (setq org-octopress-directory-org-posts "~/testBlog/org")
+;;   (setq org-octopress-setup-file          "~/org-sty/setupfile.org")
+;;   )
+
+;; Jekyll
+;; (require 'ox-publish)
+;; (require 'ox-jekyll)
 
 ;; package for exporting org to markdown
 (use-package ox-gfm
@@ -479,7 +539,7 @@
  '(nyan-mode t)
  '(package-selected-packages
    (quote
-    (swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
