@@ -212,7 +212,8 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
-     (R . t)))
+     (R . t)
+     (haskell . t)))
 
   ;; initial settings
   ;; key bindings
@@ -221,6 +222,10 @@
   (global-set-key "\C-cc" 'org-capture)
   (global-set-key "\C-cb" 'org-iswitchb)
 
+  ;; sets a default target file for captures
+  (setq org-default-notes-file
+	(concat (file-name-as-directory org-directory) "tasks.org"))
+  
   ;; create CLOSED timestamps when TODO -> DONE
   (setq org-log-done 'time)
 
@@ -306,7 +311,7 @@
   (setq org-octopress-directory-posts     "~/hanjae1122.github.io/_posts")
   (setq org-octopress-directory-org-top   "~/hanjae1122.github.io/org")
   (setq org-octopress-directory-org-posts "~/hanjae1122.github.io/org/_posts")
-  (setq org-octopress-setup-file          "~/Org/ox_jekyll_setupfile.org")
+  (setq org-octopress-setup-file          "~/org/ox_jekyll_setupfile.org")
 
   ;; need to change org links to match website structure
   ;; we use permalink in _config.yml to fix path depth and use relative paths
@@ -502,6 +507,7 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#f0f0f0" "#50a14f"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#f0f0f0" "#9ca0a4"))
  '(nyan-mode t)
+ '(org-agenda-files nil)
  '(package-selected-packages
    (quote
     (smartparens-config org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
