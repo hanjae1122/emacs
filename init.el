@@ -1,8 +1,8 @@
 ;; Jae Han's init.el file
 ;; Emacs settings
 
-
 ;; Early configurations
+(setq debug-on-error t)
 ;; when delete, move to trash
 (setq delete-by-moving-to-trash t)
 (setq trash-directory "~/.Trash")
@@ -81,6 +81,7 @@
 
 ;; Set up archives
 (require 'package)
+(package-initialize)
 (setq package-enable-at-startup nil)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
@@ -91,10 +92,15 @@
 (add-to-list 'load-path "~/.emacs.d/raw/")
 ;; install packages to .emacs.d/packages
 (setq package-user-dir (expand-file-name "packages" user-emacs-directory))
-; fetch the list of packages available
-(unless package-archive-contents
+;; ; fetch the list of packages available
+;; (unless package-archive-contents
+;;   (package-refresh-contents))
+;; (package-initialize)
+
+(unless package-archive-contents    ;; Refresh the packages descriptions
   (package-refresh-contents))
-(package-initialize)
+(setq package-load-list '(all))     ;; List of packages to load
+(package-initialize)                ;; Initialize & Install Package
 
 ;; Use-package
 ;; install and require use-package if not already
