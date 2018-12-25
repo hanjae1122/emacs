@@ -1,0 +1,6 @@
+# contributor: Jae Han
+# key: iplt
+# group: import
+# --
+import matplotlib.pyplot as plt
+$0

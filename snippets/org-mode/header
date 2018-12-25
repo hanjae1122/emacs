@@ -1,0 +1,12 @@
+# contributor: Jae Han
+# key: <O
+# group: template
+# --
+#+TITLE: $1
+#+AUTHOR: Jae Hyuk (John) Han
+#+STARTUP: content
+#+OPTIONS: ^:nil num:nil \n:nil toc:nil
+#+PROPERTY: header-args :exports both :results output :session
+#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry} \usepackage{parskip} \setlength{\parindent}{0pt} \setlength{\parskip}{\baselineskip}  \usepackage{caption} \captionsetup[table]{skip=10pt} \usepackage{float} \usepackage{minted} \usepackage{color} \setlength{\leftskip}{15pt} 
+
+$0
