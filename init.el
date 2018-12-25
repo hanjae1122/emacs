@@ -49,12 +49,12 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq dired-deletion-confirmer #'y-or-n-p)
 
-;; ;; more useful frame title, that show either a file or a
-;; ;; buffer name (if the buffer isn't visiting a file)
-;; (setq frame-title-format
-;;       '((:eval (if (buffer-file-name)
-;;                    (abbreviate-file-name (buffer-file-name))
-;;                  "%b"))))
+;; more useful frame title, that show either a file or a
+;; buffer name (if the buffer isn't visiting a file)
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
 
 ;; Text editing
 ;; delete the selection with a keypress
@@ -206,141 +206,141 @@
 ;;   )
 
 
-;; ;; Packages
+;; Packages
 ;; ;; get environment variables such as $PATH from the shell (only for unix systems)
 ;; (use-package exec-path-from-shell
 ;;   :if (memq window-system '(mac ns))
 ;;   :config
 ;;   (exec-path-from-shell-initialize))
 
-;; (use-package org
-;;   :hook (org-mode . visual-line-mode)
-;;   :config
-;;   ;; enable languages for org-
-;;   (org-babel-do-load-languages
-;;    'org-babel-load-languages
-;;    '((python . t)
-;;      (R . t)))
+(use-package org
+  :hook (org-mode . visual-line-mode)
+  :config
+  ;; enable languages for org-
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (R . t)))
 
-;;   ;; initial settings
-;;   ;; key bindings
-;;   (global-set-key "\C-cl" 'org-store-link)
-;;   (global-set-key "\C-ca" 'org-agenda)
-;;   (global-set-key "\C-cc" 'org-capture)
-;;   (global-set-key "\C-cb" 'org-iswitchb)
+  ;; initial settings
+  ;; key bindings
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cc" 'org-capture)
+  (global-set-key "\C-cb" 'org-iswitchb)
 
-;;   ;; create CLOSED timestamps when TODO -> DONE
-;;   (setq org-log-done 'time)
+  ;; create CLOSED timestamps when TODO -> DONE
+  (setq org-log-done 'time)
 
-;;   ;; disable using sub(_) and superscripts(^)
-;;   (setq org-use-sub-superscripts nil)
-;;   (setq org-export-with-sub-superscripts nil)
+  ;; disable using sub(_) and superscripts(^)
+  (setq org-use-sub-superscripts nil)
+  (setq org-export-with-sub-superscripts nil)
 
-;;   ;; don't ask when evaluating code blocks
-;;   (setq org-confirm-babel-evaluate nil)
+  ;; don't ask when evaluating code blocks
+  (setq org-confirm-babel-evaluate nil)
 
-;;   ;; use colored code blocks in org file
-;;   (setq org-src-fontify-natively t)
+  ;; use colored code blocks in org file
+  (setq org-src-fontify-natively t)
 
-;;   ;; ;; export to pdf in color
-;;   (add-to-list 'org-latex-packages-alist '("" "color"))
+  ;; ;; ;; export to pdf in color
+  ;; (add-to-list 'org-latex-packages-alist '("" "color"))
 
-;;   ;; ;; settings for minted
-;;   (add-to-list 'org-latex-packages-alist '("" "minted"))
-;;   ;; (add-to-list 'org-latex-packages-alist '("" "minted" nil))
-;;   (setq org-latex-listings 'minted)
-;;   (setq org-latex-pdf-process
-;;   	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;;   	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;;   	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  ;; ;; ;; settings for minted
+  ;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+  ;; ;; (add-to-list 'org-latex-packages-alist '("" "minted" nil))
+  ;; (setq org-latex-listings 'minted)
+  ;; (setq org-latex-pdf-process
+  ;; 	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+  ;; 	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+  ;; 	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
-;;   ;; ;; minted conflicts with latex preview with dvipng so convert to imagemagick
-;;   (setq org-latex-create-formula-image-program 'imagemagick)
-;;   ;; (setq org-latex-create-formula-image-program 'dvipng)
+  ;; ;; ;; minted conflicts with latex preview with dvipng so convert to imagemagick
+  ;; (setq org-latex-create-formula-image-program 'imagemagick)
+  ;; ;; (setq org-latex-create-formula-image-program 'dvipng)
 
-;;   ;; src_block exporting
-;;   ;; (setq org-src-preserve-indentation t)
-;;   (setq org-src-preserve-indentation nil
-;; 	org-edit-src-content-indentation 0)
-;;   ;; (setq indent-tabs-mode nil)
+  ;; src_block exporting
+  ;; (setq org-src-preserve-indentation t)
+  (setq org-src-preserve-indentation nil
+	org-edit-src-content-indentation 0)
+  ;; (setq indent-tabs-mode nil)
 
-;;   ;; open folders in dired
-;;   (add-to-list 'org-file-apps '(directory . emacs))
-;;   ;; "Switch entry to DONE when all subentries are done, to TODO otherwise."
-;;   (defun org-summary-todo (n-done n-not-done)
-;;     (let (org-log-done org-log-states)   ; turn off logging
-;;       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-;;   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-;;   ;; open image files in same buffer
-;;   (setq org-toggle-inline-images t)
-;;   ;; use tab natively in source blocks
-;;   (setq org-src-tab-acts-natively t)
-;;   ;; place captions below
-;;   (setq org-latex-caption-above nil)
-;;   ;; export apostrophes correctly
-;;   (setq org-export-with-smart-quotes t)
+  ;; open folders in dired
+  (add-to-list 'org-file-apps '(directory . emacs))
+  ;; "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (defun org-summary-todo (n-done n-not-done)
+    (let (org-log-done org-log-states)   ; turn off logging
+      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+  ;; open image files in same buffer
+  (setq org-toggle-inline-images t)
+  ;; use tab natively in source blocks
+  (setq org-src-tab-acts-natively t)
+  ;; place captions below
+  (setq org-latex-caption-above nil)
+  ;; export apostrophes correctly
+  (setq org-export-with-smart-quotes t)
 
-;;   ;; LATEX export: start each heading on new page
-;;   ;; (defun org/get-headline-string-element  (headline backend info)
-;;   ;;   (let ((prop-point (next-property-change 0 headline)))
-;;   ;;     (if prop-point (plist-get (text-properties-at prop-point headline) :parent))))
+  ;; LATEX export: start each heading on new page
+  ;; (defun org/get-headline-string-element  (headline backend info)
+  ;;   (let ((prop-point (next-property-change 0 headline)))
+  ;;     (if prop-point (plist-get (text-properties-at prop-point headline) :parent))))
 
-;;   ;; (defun org/ensure-latex-clearpage (headline backend info)
-;;   ;;   (when (org-export-derived-backend-p backend 'latex)
-;;   ;;     (let ((elmnt (org/get-headline-string-element headline backend info)))
-;;   ;; 	(when (member "newpage" (org-element-property :tags elmnt))
-;;   ;; 	  (concat "\\clearpage\n" headline)))))
+  ;; (defun org/ensure-latex-clearpage (headline backend info)
+  ;;   (when (org-export-derived-backend-p backend 'latex)
+  ;;     (let ((elmnt (org/get-headline-string-element headline backend info)))
+  ;; 	(when (member "newpage" (org-element-property :tags elmnt))
+  ;; 	  (concat "\\clearpage\n" headline)))))
 
-;;   ;; (eval-after-load 'ox
-;;   ;; '(progn
-;;   ;;    (add-to-list 'org-export-filter-headline-functions
-;;   ;;                 'my-html-filter-headline-yesdot)))
+  ;; (eval-after-load 'ox
+  ;; '(progn
+  ;;    (add-to-list 'org-export-filter-headline-functions
+  ;;                 'my-html-filter-headline-yesdot)))
+  )
+
+;; package for exporting org to markdown
+(use-package ox-gfm
+  :after org)
+
+
+;; Programming
+(use-package ess-site
+  :load-path "~/.emacs.d/raw/ess/lisp/"
+  :commands R
+  )
+
+;; (use-package flycheck
+;;   :hook (python-mode . flycheck-mode)
 ;;   )
 
-;; ;; package for exporting org to markdown
-;; (use-package ox-gfm
-;;   :after org)
+(use-package elpy
+  :hook ((python-mode . elpy-mode)
+	 (python-mode . visual-line-mode))
+  :config
+  ;; (pyvenv-workon "py3-Egm4BeYe")
+  ;; remove warning
+  (setq python-shell-completion-native-enable nil)
+  ;; use Ipython interpreter
+  (setq python-shell-interpreter "ipython"
+  	python-shell-interpreter-args "-i --simple-prompt")
+  ;; (setq python-shell-interpreter "jupyter"
+  ;; 	python-shell-interpreter-args "console --simple-prompt"
+  ;; 	python-shell-prompt-detect-failure-warning nil)
+  ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
+  ;; 	       "jupyter")
+  ;; ;; disable flymake (use flycheck)
+  ;; (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  )
 
+(use-package projectile
+  :hook (prog-mode . projectile-mode)
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  )
 
-;; ;; Programming
-;; (use-package ess-site
-;;   :load-path "~/.emacs.d/raw/ess/lisp/"
-;;   :commands R
-;;   )
-
-;; ;; (use-package flycheck
-;; ;;   :hook (python-mode . flycheck-mode)
-;; ;;   )
-
-;; (use-package elpy
-;;   :hook ((python-mode . elpy-mode)
-;; 	 (python-mode . visual-line-mode))
-;;   :config
-;;   ;; (pyvenv-workon "py3-Egm4BeYe")
-;;   ;; remove warning
-;;   (setq python-shell-completion-native-enable nil)
-;;   ;; use Ipython interpreter
-;;   (setq python-shell-interpreter "ipython"
-;;   	python-shell-interpreter-args "-i --simple-prompt")
-;;   ;; (setq python-shell-interpreter "jupyter"
-;;   ;; 	python-shell-interpreter-args "console --simple-prompt"
-;;   ;; 	python-shell-prompt-detect-failure-warning nil)
-;;   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
-;;   ;; 	       "jupyter")
-;;   ;; ;; disable flymake (use flycheck)
-;;   ;; (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-;;   )
-
-;; (use-package projectile
-;;   :hook (prog-mode . projectile-mode)
-;;   :config
-;;   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-;;   )
-
-;; (use-package magit
-;;   :bind (("C-x g" . 'magit-status)
-;; 	 ("C-x M-g" . 'magit-dispatch-popup))
-;;   )
+(use-package magit
+  :bind (("C-x g" . 'magit-status)
+	 ("C-x M-g" . 'magit-dispatch-popup))
+  )
 
 ;; ;;; Install epdfinfo via 'brew install pdf-tools' and then install the
 ;; ;;; pdf-tools elisp via the use-package below. To upgrade the epdfinfo
@@ -356,49 +356,49 @@
 ;;   (pdf-tools-install)
 ;;   )
 
-;; (use-package yasnippet
-;;   :config
-;;   (yas-global-mode t)
-;;   )
+(use-package yasnippet
+  :config
+  (yas-global-mode t)
+  )
 
-;; (use-package eimp
-;;   :hook (image-mode . eimp-mode)
-;;   )
+(use-package eimp
+  :hook (image-mode . eimp-mode)
+  )
 
-;; (use-package rainbow-delimiters
-;;   :hook ((prog-mode . rainbow-delimiters-mode))
-;;   )
+(use-package rainbow-delimiters
+  :hook ((prog-mode . rainbow-delimiters-mode))
+  )
 
-;; (use-package linum-relative
-;;   :hook (prog-mode . linum-relative-mode)
-;;   :config
-;;   ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
-;;   (setq linum-relative-backend 'display-line-numbers-mode))
+(use-package linum-relative
+  :hook (prog-mode . linum-relative-mode)
+  :config
+  ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
+  (setq linum-relative-backend 'display-line-numbers-mode))
 
-;; (use-package undo-tree
-;;   :config
-;;   (global-undo-tree-mode))
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode))
 
-;; (use-package dimmer
-;;   :config
-;;   (dimmer-mode))
-;; ;; bind right alt key to super
-;; (setq ns-right-option-modifier 'super)
+(use-package dimmer
+  :config
+  (dimmer-mode))
+;; bind right alt key to super
+(setq ns-right-option-modifier 'super)
 
-;; (use-package crux
-;;   :config
-;;   (global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
-;;   (global-set-key (kbd "C-c o") #'crux-open-with)
-;;   (global-set-key [(shift return)] #'crux-smart-open-line)
-;;   (global-set-key (kbd "C-<backspace>") #'crux-kill-line-backwards)
-;;   (global-set-key [remap kill-whole-line] #'crux-smart-kill-line)
-;;   ;; (global-set-key [remap kill-whole-line] #'crux-kill-whole-line)
-;;   (global-set-key (kbd "C-c n") #'crux-cleanup-buffer-or-region))
+(use-package crux
+  :config
+  (global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
+  (global-set-key (kbd "C-c o") #'crux-open-with)
+  (global-set-key [(shift return)] #'crux-smart-open-line)
+  (global-set-key (kbd "C-<backspace>") #'crux-kill-line-backwards)
+  (global-set-key [remap kill-whole-line] #'crux-smart-kill-line)
+  ;; (global-set-key [remap kill-whole-line] #'crux-kill-whole-line)
+  (global-set-key (kbd "C-c n") #'crux-cleanup-buffer-or-region))
 
 
-;; (use-package popup-kill-ring
-;;   :config
-;;   (global-set-key "\M-y" 'popup-kill-ring))
+(use-package popup-kill-ring
+  :config
+  (global-set-key "\M-y" 'popup-kill-ring))
 
 
 ;; (use-package dashboard
@@ -411,59 +411,59 @@
 ;;                         (agenda . 5)
 ;;                         (registers . 5))))
 
-;; (use-package company)
+(use-package company)
 
-;; (use-package smartparens-config
-;;     :ensure smartparens
-;;     :config
-;;     (show-smartparens-global-mode t)
-;;     ;; when you press RET, the curly braces automatically
-;;     ;; add another newline
-;;     (sp-with-modes '(c-mode c++-mode)
-;;       (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-;;       )
-;;     ;; bug with '' in c-mode
-;;     (setq sp-escape-quotes-after-insert nil)
-;;     )
+(use-package smartparens-config
+    :ensure smartparens
+    :config
+    (show-smartparens-global-mode t)
+    ;; when you press RET, the curly braces automatically
+    ;; add another newline
+    (sp-with-modes '(c-mode c++-mode)
+      (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+      )
+    ;; bug with '' in c-mode
+    (setq sp-escape-quotes-after-insert nil)
+    )
 
-;; ;; (use-package beacon
-;; ;;   :config
-;; ;;   (beacon-mode 1))
-
-;; ;; enable move between sub-words
-;; ;; only for haskell for now
-;; (use-package haskell-mode
-;;   :hook (haskell-mode . subword-mode)
-;;   )
-
-;; (use-package ivy
+;; (use-package beacon
 ;;   :config
-;;   (ivy-mode t)
-;;   (setq ivy-use-virtual-buffers t)
-;;   (setq ivy-count-format "(%d/%d) ")
-;;   ;; use ivy in magit
-;;   (setq magit-completing-read-function 'ivy-completing-read)
-;;   )
+;;   (beacon-mode 1))
 
-;; (use-package swiper
-;;   :config
-;;   (defun bind-swiper-key ()
-;;     (local-set-key (kbd "C-s") 'swiper))
-;;   (add-hook 'dired-mode-hook 'bind-swiper-key)
-;;   (add-hook 'prog-mode-hook 'bind-swiper-key))
+;; enable move between sub-words
+;; only for haskell for now
+(use-package haskell-mode
+  :hook (haskell-mode . subword-mode)
+  )
 
-;; ;; ====================================================================================
-;; ;; ====================================================================================
-;; ;; ====================================================================================
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(package-selected-packages (quote (doom-themes use-package))))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  )
+(use-package ivy
+  :config
+  (ivy-mode t)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  ;; use ivy in magit
+  (setq magit-completing-read-function 'ivy-completing-read)
+  )
+
+(use-package swiper
+  :config
+  (defun bind-swiper-key ()
+    (local-set-key (kbd "C-s") 'swiper))
+  (add-hook 'dired-mode-hook 'bind-swiper-key)
+  (add-hook 'prog-mode-hook 'bind-swiper-key))
+
+;; ====================================================================================
+;; ====================================================================================
+;; ====================================================================================
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (doom-themes use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
