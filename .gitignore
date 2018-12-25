@@ -1,9 +1,7 @@
 url
 archive
 packages
-.emacs.desktop
-.emacs.desktop.lock
-
+abbrev_defs
 
 # Package-specific
 projectile-bookmarks.eld
