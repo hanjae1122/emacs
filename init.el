@@ -347,8 +347,7 @@
 
 
 ;; Programming
-(use-package ess-site
-  :load-path "~/.emacs.d/raw/ess/lisp/"
+(use-package ess
   :commands R
   )
 
@@ -497,6 +496,9 @@
     (local-set-key (kbd "C-s") 'swiper))
   (add-hook 'dired-mode-hook 'bind-swiper-key)
   (add-hook 'prog-mode-hook 'bind-swiper-key))
+
+
+(use-package command-log-mode)
 
 ;; ====================================================================================
 ;; ====================================================================================
