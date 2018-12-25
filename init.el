@@ -332,12 +332,12 @@
   ;;  (org-add-link-type "img" 'org-custom-link-img-follow 'org-custom-link-img-export)
   )
 
-(use-package org-pdfview
-  :after (:all org pdf-tools)
-  :config
-  (add-to-list 'org-file-apps 
-               '("\\.pdf\\'" . (lambda (file link)
-				 (org-pdfview-open link)))))
+;; (use-package org-pdfview
+;;   :after (:all org pdf-tools)
+;;   :config
+;;   (add-to-list 'org-file-apps 
+;;                '("\\.pdf\\'" . (lambda (file link)
+;; 				 (org-pdfview-open link)))))
 
 
 ;; ;; Programming
