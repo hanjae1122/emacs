@@ -1,0 +1,3 @@
+[submodule "themes/dracula-theme"]
+	path = themes/dracula-theme
+	url = https://github.com/dracula/emacs.git
