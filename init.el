@@ -115,12 +115,6 @@
 (setq use-package-always-ensure t)
 
 ;; Built-in modes
-;; for useful autocompletion
-;; move around with shift+arrow
-(use-package windmove
-  :config
-  (windmove-default-keybindings))
-
 ;; hideshow (builtin)
 (use-package hideshow
   :hook ((c-mode . hs-minor-mode)
