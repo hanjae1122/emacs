@@ -1,0 +1,24 @@
+| Mode       | KBD            | FXN                 |
+|------------+----------------+---------------------|
+| windmove   | Shift arrow    | move across buffers |
+| hideshow   | C-c +          | toggle hide/show    |
+|            | C-c \          | toggle entirely     |
+| undo-tree  | C-(/ or ?)     | undo or redo        |
+|            | C-x u          | visualize           |
+|            | d or t or q    | diff/timestamp/quit |
+|            | C-x r (u or U) | save/restore state  |
+| crux       | Shift Ret      | open line           |
+|            | C-<bckspc>     | kill back           |
+|            | C-c n          | delete whtspc       |
+|            | C-c n          | clean region        |
+| projectile | C-c p f        | jump to file        |
+|            | C-c p d        | jump to dir         |
+|            | C-c p b        | list local buffers  |
+|            | C-c p e        | jump to recent      |
+|            | C-c p g s      | grep                |
+|            | C-c p o        | multi-occur         |
+|            | C-c p r        | text replace        |
+|            | C-c p p        | switch project      |
+|            | C-c p c        | compile             |
+|            | C-c p a        | switch cpp <-> h    |
+

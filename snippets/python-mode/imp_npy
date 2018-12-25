@@ -1,0 +1,6 @@
+# contributor: Jae Han
+# key: inpy
+# group: import
+# --
+import numpy as np
+$0

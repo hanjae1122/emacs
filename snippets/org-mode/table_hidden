@@ -1,0 +1,9 @@
+# contributor: Jae Han
+# key: <Ta
+# group: template
+# --
+#+CAPTION: $1
+#+ATTR_LATEX: :placement [H] :align c|p{4cm}|p{4cm}
+|$0|||
+|/|<||
+||<20>|<20>|

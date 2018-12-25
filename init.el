@@ -85,7 +85,7 @@
 (setq package-enable-at-startup nil)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
-			 ("org" . "http://orgmode.org/elpa/")
+			 ;; ("org" . "http://orgmode.org/elpa/")
 			 ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
 			 ))
 ;; load path for packages download in raw form
@@ -179,26 +179,19 @@
 
 
 ;; Themes
-(use-package doom-themes
+(use-package dracula-theme
+  :load-path "themes/dracula-theme"
   :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-	doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; (load-theme 'dracula t)
+  )
 
-  ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
-  ;; may have their own settings.
-  (load-theme 'doom-vibrant t)
+(use-package spacemacs-dark-theme
+  :load-path "themes/spacemacs-theme"
+  )
 
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-
-  ;; ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;; (doom-themes-neotree-config)
-  ;; ;; or for treemacs users
-  ;; (doom-themes-treemacs-config)
-
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+;; disabled due to conflict with ox-jekyll
+;; (use-package doom-themes
+;;   )
 
 ;; ;; Package specifics
 ;; (use-package ace-window
@@ -220,7 +213,8 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
-     (R . t)))
+     (R . t)
+     (haskell . t)))
 
   ;; initial settings
   ;; key bindings
@@ -229,6 +223,10 @@
   (global-set-key "\C-cc" 'org-capture)
   (global-set-key "\C-cb" 'org-iswitchb)
 
+  ;; sets a default target file for captures
+  (setq org-default-notes-file
+	(concat (file-name-as-directory org-directory) "tasks.org"))
+  
   ;; create CLOSED timestamps when TODO -> DONE
   (setq org-log-done 'time)
 
@@ -266,6 +264,7 @@
 
   ;; open folders in dired
   (add-to-list 'org-file-apps '(directory . emacs))
+  
   ;; "Switch entry to DONE when all subentries are done, to TODO otherwise."
   (defun org-summary-todo (n-done n-not-done)
     (let (org-log-done org-log-states)   ; turn off logging
@@ -295,11 +294,50 @@
   ;; '(progn
   ;;    (add-to-list 'org-export-filter-headline-functions
   ;;                 'my-html-filter-headline-yesdot)))
+  
+  ;; set export backends (added beamer)
+  (setq org-export-backends (quote (ascii beamer html icalendar latex odt)))
   )
 
 ;; package for exporting org to markdown
 (use-package ox-gfm
   :after org)
+
+;; Octopress with jekyll
+(use-package org-octopress
+  :after org
+  :load-path "~/.emacs.d/raw/org-octopress/"
+  :config
+  (setq org-octopress-directory-top       "~/hanjae1122.github.io")
+  (setq org-octopress-directory-posts     "~/hanjae1122.github.io/_posts")
+  (setq org-octopress-directory-org-top   "~/hanjae1122.github.io/org")
+  (setq org-octopress-directory-org-posts "~/hanjae1122.github.io/org/_posts")
+  (setq org-octopress-setup-file          "~/.emacs.d/ox_jekyll_setupfile.org")
+
+  ;; need to change org links to match website structure
+  ;; we use permalink in _config.yml to fix path depth and use relative paths
+  
+  ;; another way is to add custom links but this disables ATTR_HTML, texted links etc
+  ;; ;; checkout https://www.mfoot.com/blog/2015/11/17/using-org-mode-to-write-jekyll-blogs/
+  ;; ;; and https://stackoverflow.com/questions/14684263/how-to-org-mode-image-absolute-path-of-export-html
+  ;;  (defun org-custom-link-img-follow (path)
+  ;;    (org-open-file-with-emacs
+  ;;     (format "../files/image/%s" path)))
+
+  ;;  (defun org-custom-link-img-export (path desc format)
+  ;;    (cond
+  ;;     ((eq format 'html)
+  ;;      (format "<img src=\"/files/image/%s\" alt=\"%s\"/>" path desc))))
+
+  ;;  (org-add-link-type "img" 'org-custom-link-img-follow 'org-custom-link-img-export)
+  )
+
+(use-package org-pdfview
+  :after (:all org pdf-tools)
+  :config
+  (add-to-list 'org-file-apps 
+               '("\\.pdf\\'" . (lambda (file link)
+				 (org-pdfview-open link)))))
 
 
 ;; ;; Programming
@@ -382,9 +420,10 @@
 (use-package dimmer
   :config
   (dimmer-mode))
+
+
 ;; bind right alt key to super
 (setq ns-right-option-modifier 'super)
-
 (use-package crux
   :config
   (global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
@@ -413,22 +452,23 @@
 
 (use-package company)
 
-(use-package smartparens-config
-    :ensure smartparens
-    :config
-    (show-smartparens-global-mode t)
-    ;; when you press RET, the curly braces automatically
-    ;; add another newline
-    (sp-with-modes '(c-mode c++-mode)
-      (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-      )
-    ;; bug with '' in c-mode
-    (setq sp-escape-quotes-after-insert nil)
-    )
+(use-package smartparens
+  :config
+  ;; Use the base configuration
+  (require 'smartparens-config nil t)
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
+  ;; when you press RET, the curly braces automatically
+  ;; add another newline
+  (sp-with-modes '(c-mode c++-mode)
+    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
+  ;; bug with '' in c-mode
+  (setq sp-escape-quotes-after-insert nil))
 
 ;; (use-package beacon
 ;;   :config
 ;;   (beacon-mode 1))
+
 
 ;; enable move between sub-words
 ;; only for haskell for now
@@ -455,15 +495,3 @@
 ;; ====================================================================================
 ;; ====================================================================================
 ;; ====================================================================================
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (doom-themes use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

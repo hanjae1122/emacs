@@ -1,0 +1,7 @@
+# contributor: Jae Han
+# key: <P
+# group: template
+# --
+#+CAPTION: $1
+#+ATTR_LATEX: :width 0.8\textwidth :placement [H]
+$0

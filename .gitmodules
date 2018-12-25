@@ -1,0 +1,9 @@
+[submodule "themes/dracula-theme"]
+	path = themes/dracula-theme
+	url = https://github.com/dracula/emacs.git
+[submodule "themes/spacemacs-theme"]
+	path = themes/spacemacs-theme
+	url = https://github.com/nashamri/spacemacs-theme.git
+[submodule "raw/org-octopress"]
+	path = raw/org-octopress
+	url = https://github.com/hanjae1122/org-octopress.git

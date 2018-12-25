@@ -1,0 +1,13 @@
+# contributor: Jae Han
+# name: fxn_docstring
+# key: deff
+# group: definition
+# --
+def ${1:name}($2):
+    \"\"\"$3
+
+    Args:${2:$(python-args-to-docstring yas-text)}
+    Returns:
+    ${4:type}:
+    \"\"\"
+    $0
