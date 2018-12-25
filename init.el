@@ -311,7 +311,7 @@
   (setq org-octopress-directory-posts     "~/hanjae1122.github.io/_posts")
   (setq org-octopress-directory-org-top   "~/hanjae1122.github.io/org")
   (setq org-octopress-directory-org-posts "~/hanjae1122.github.io/org/_posts")
-  (setq org-octopress-setup-file          "~/org/ox_jekyll_setupfile.org")
+  (setq org-octopress-setup-file          "~/.emacs.d/ox_jekyll_setupfile.org")
 
   ;; need to change org links to match website structure
   ;; we use permalink in _config.yml to fix path depth and use relative paths
