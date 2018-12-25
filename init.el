@@ -311,6 +311,7 @@
 ;; Octopress with jekyll
 (use-package org-octopress
   :after org
+  :ensure orglue :ensure ctable
   :load-path "~/.emacs.d/raw/org-octopress/"
   :config
   (setq org-octopress-directory-top       "~/hanjae1122.github.io")
