@@ -1,3 +1,4 @@
+
 ;; Jae Han's init.el file
 ;; Emacs settings
 
@@ -451,10 +452,9 @@
 
 (use-package company)
 
-(use-package smartparens
+(use-package smartparens-config
+  :ensure smartparens
   :config
-  ;; Use the base configuration
-  (require 'smartparens-config nil t)
   (smartparens-global-mode t)
   (show-smartparens-global-mode t)
   ;; when you press RET, the curly braces automatically
@@ -462,7 +462,66 @@
   (sp-with-modes '(c-mode c++-mode)
     (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET"))))
   ;; bug with '' in c-mode
-  (setq sp-escape-quotes-after-insert nil))
+  (setq sp-escape-quotes-after-insert nil)
+
+  (defmacro def-pairs (pairs)
+    "Define functions for pairing. PAIRS is an alist of (NAME . STRING)
+conses, where NAME is the function name that will be created and
+STRING is a single-character string that marks the opening character.
+
+  (def-pairs ((paren . \"(\")
+              (bracket . \"[\"))
+
+defines the functions WRAP-WITH-PAREN and WRAP-WITH-BRACKET,
+respectively."
+    `(progn
+       ,@(loop for (key . val) in pairs
+               collect
+               `(defun ,(read (concat
+                               "wrap-with-"
+                               (prin1-to-string key)
+                               "s"))
+                    (&optional arg)
+                  (interactive "p")
+                  (sp-wrap-with-pair ,val)))))
+
+  (def-pairs ((paren . "(")
+              (bracket . "[")
+              (brace . "{")
+              (single-quote . "'")
+              (double-quote . "\"")
+              (back-quote . "`")))
+
+  (bind-keys
+   :map smartparens-mode-map
+   ("C-M-a" . sp-beginning-of-sexp)
+   ("C-M-e" . sp-end-of-sexp)
+
+   ("C-M-f" . sp-forward-sexp)
+   ("C-M-b" . sp-backward-sexp)
+
+   ("C-M-n" . sp-next-sexp)
+   ("C-M-p" . sp-previous-sexp)
+
+   ("C-S-f" . sp-forward-symbol)
+   ("C-S-b" . sp-backward-symbol)
+
+   ("C-M-t" . sp-transpose-sexp)
+   ("C-M-k" . sp-kill-sexp)
+   ("C-M-w" . sp-copy-sexp)
+   ("C-M-d" . delete-sexp)
+
+   ("M-[" . sp-backward-unwrap-sexp)
+   ("M-]" . sp-unwrap-sexp)
+
+   ("C-c ("  . wrap-with-parens)
+   ("C-c ["  . wrap-with-brackets)
+   ("C-c {"  . wrap-with-braces)
+   ("C-c '"  . wrap-with-single-quotes)
+   ("C-c \"" . wrap-with-double-quotes)
+   ("C-c _"  . wrap-with-underscores)
+   ("C-c `"  . wrap-with-back-quotes))
+  )
 
 ;; (use-package beacon
 ;;   :config
@@ -513,7 +572,7 @@
  '(org-agenda-files (quote ("~/org/tasks.org")))
  '(package-selected-packages
    (quote
-    (smartparens-config org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (command-log-mode ess smartparens-config org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map

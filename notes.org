@@ -1,24 +1,44 @@
-| Mode       | KBD            | FXN                 |
-|------------+----------------+---------------------|
-| windmove   | Shift arrow    | move across buffers |
-| hideshow   | C-c +          | toggle hide/show    |
-|            | C-c \          | toggle entirely     |
-| undo-tree  | C-(/ or ?)     | undo or redo        |
-|            | C-x u          | visualize           |
-|            | d or t or q    | diff/timestamp/quit |
-|            | C-x r (u or U) | save/restore state  |
-| crux       | Shift Ret      | open line           |
-|            | C-<bckspc>     | kill back           |
-|            | C-c n          | delete whtspc       |
-|            | C-c n          | clean region        |
-| projectile | C-c p f        | jump to file        |
-|            | C-c p d        | jump to dir         |
-|            | C-c p b        | list local buffers  |
-|            | C-c p e        | jump to recent      |
-|            | C-c p g s      | grep                |
-|            | C-c p o        | multi-occur         |
-|            | C-c p r        | text replace        |
-|            | C-c p p        | switch project      |
-|            | C-c p c        | compile             |
-|            | C-c p a        | switch cpp <-> h    |
-
+| Mode        | KBD               | FXN                           |
+|-------------+-------------------+-------------------------------|
+| windmove    | Shift arrow       | move across buffers           |
+| hideshow    | C-c +             | toggle hide/show              |
+|             | C-c \             | toggle entirely               |
+| undo-tree   | C-(/ or ?)        | undo or redo                  |
+|             | C-x u             | visualize                     |
+|             | d or t or q       | diff/timestamp/quit           |
+|             | C-x r (u or U)    | save/restore state            |
+| crux        | Shift Ret         | open line                     |
+|             | C-<bckspc>        | kill back                     |
+|             | C-c n             | delete whtspc                 |
+|             | C-c n             | clean region                  |
+| projectile  | C-c p f           | jump to file                  |
+|             | C-c p d           | jump to dir                   |
+|             | C-c p b           | list local buffers            |
+|             | C-c p e           | jump to recent                |
+|             | C-c p g s         | grep                          |
+|             | C-c p o           | multi-occur                   |
+|             | C-c p r           | text replace                  |
+|             | C-c p p           | switch project                |
+|             | C-c p c           | compile                       |
+|             | C-c p a           | switch cpp <-> h              |
+| smartparens | C-M-spc <WRAPPER> | wrap exp with WRAPPER         |
+|             | C-c <WRAPPER>     | wrap exp with common WRAPPERs |
+|             | C-M-a             | sp-beginning-of-sexp          |
+|             | C-M-e             | sp-end-of-sexp                |
+|             |                   |                               |
+|             | C-M-f             | sp-forward-sexp               |
+|             | C-M-b             | sp-backward-sexp              |
+|             |                   |                               |
+|             | C-M-n             | sp-next-sexp                  |
+|             | C-M-p             | sp-previous-sexp              |
+|             |                   |                               |
+|             | C-S-f             | sp-forward-symbol             |
+|             | C-S-b             | sp-backward-symbol            |
+|             |                   |                               |
+|             | C-M-t             | sp-transpose-sexp             |
+|             | C-M-k             | sp-kill-sexp                  |
+|             | C-M-w             | sp-copy-sexp                  |
+|             | C-M-d             | delete-sexp                   |
+|             |                   |                               |
+|             | M-[               | sp-backward-unwrap-sexp       |
+|             | M-]               | sp-unwrap-sexp                |
