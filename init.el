@@ -568,6 +568,7 @@
 
 (use-package command-log-mode)
 
+(use-package fireplace)
 ;; ====================================================================================
 ;; ====================================================================================
 ;; ====================================================================================
@@ -587,7 +588,7 @@
  '(org-agenda-files (quote ("~/org/tasks.org")))
  '(package-selected-packages
    (quote
-    (command-log-mode ess smartparens-config org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (fireplace command-log-mode ess smartparens-config org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
