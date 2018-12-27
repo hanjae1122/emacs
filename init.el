@@ -1,4 +1,3 @@
-
 ;; Jae Han's init.el file
 ;; Emacs settings
 
@@ -62,6 +61,9 @@
 
 
 ;; Custom key bindings
+;; bind right alt key to super
+(setq ns-right-alternate-modifier 'alt)
+
 (defun split-and-follow-horizontally ()
   (interactive)
   (split-window-below)
@@ -425,9 +427,6 @@
   :config
   (dimmer-mode))
 
-
-;; bind right alt key to super
-(setq ns-right-option-modifier 'super)
 (use-package crux
   :config
   (global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
