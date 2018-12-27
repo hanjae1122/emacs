@@ -456,10 +456,11 @@
 (use-package company)
 
 (use-package smartparens-config
+  :hook (prog-mode . smartparens-mode)
   :ensure smartparens
   :config
-  (smartparens-global-mode t)
-  (show-smartparens-global-mode t)
+  ;; (smartparens-global-mode t)
+  ;; (show-smartparens-global-mode t)
   ;; when you press RET, the curly braces automatically
   ;; add another newline
   (sp-with-modes '(c-mode c++-mode)
