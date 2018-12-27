@@ -214,7 +214,8 @@
    'org-babel-load-languages
    '((python . t)
      (R . t)
-     (haskell . t)))
+     (haskell . t)
+     (C . t)))
 
   ;; initial settings
   ;; key bindings
