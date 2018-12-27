@@ -22,7 +22,6 @@
 |             | C-c p c           | compile                       |
 |             | C-c p a           | switch cpp <-> h              |
 | smartparens | C-M-spc <WRAPPER> | wrap exp with WRAPPER         |
-|             | C-c <WRAPPER>     | wrap exp with common WRAPPERs |
 |             | C-M-a             | sp-beginning-of-sexp          |
 |             | C-M-e             | sp-end-of-sexp                |
 |             |                   |                               |
@@ -38,7 +37,22 @@
 |             | C-M-t             | sp-transpose-sexp             |
 |             | C-M-k             | sp-kill-sexp                  |
 |             | C-M-w             | sp-copy-sexp                  |
-|             | C-M-d             | delete-sexp                   |
 |             |                   |                               |
 |             | M-[               | sp-backward-unwrap-sexp       |
 |             | M-]               | sp-unwrap-sexp                |
+|             |                   |                               |
+|             | C-<right>         | sp-forward-slurp-sexp         |
+|             | M-<right>         | sp-forward-barf-sexp          |
+|             | C-<left>          | sp-backward-slurp-sexp        |
+|             | M-<left>          | sp-backward-barf-sexp         |
+
+* Org tables
+- Use C-c ` to edit inside hidden cells
+- Narrowing columns and wrapping lines
+  1. Add a blank line above and below the table. 
+     + The blank lines should prevent a bug when converting the table with C-c ~.
+  2. Convert the table to table.el format by C-c ~
+     + C-c ~ again to revert to org table
+  3. C-c ' to enter editing mode
+  4. Use C-u <NUM> C-c C-c < to narrow width
+
