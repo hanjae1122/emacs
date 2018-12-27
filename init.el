@@ -468,34 +468,6 @@
   ;; bug with '' in c-mode
   (setq sp-escape-quotes-after-insert nil)
 
-  (defmacro def-pairs (pairs)
-    "Define functions for pairing. PAIRS is an alist of (NAME . STRING)
-conses, where NAME is the function name that will be created and
-STRING is a single-character string that marks the opening character.
-
-  (def-pairs ((paren . \"(\")
-              (bracket . \"[\"))
-
-defines the functions WRAP-WITH-PAREN and WRAP-WITH-BRACKET,
-respectively."
-    `(progn
-       ,@(loop for (key . val) in pairs
-               collect
-               `(defun ,(read (concat
-                               "wrap-with-"
-                               (prin1-to-string key)
-                               "s"))
-                    (&optional arg)
-                  (interactive "p")
-                  (sp-wrap-with-pair ,val)))))
-
-  (def-pairs ((paren . "(")
-              (bracket . "[")
-              (brace . "{")
-              (single-quote . "'")
-              (double-quote . "\"")
-              (back-quote . "`")))
-
   (bind-keys
    :map smartparens-mode-map
    ("C-M-a" . sp-beginning-of-sexp)
@@ -513,18 +485,57 @@ respectively."
    ("C-M-t" . sp-transpose-sexp)
    ("C-M-k" . sp-kill-sexp)
    ("C-M-w" . sp-copy-sexp)
-   ("C-M-d" . delete-sexp)
+   ;; ("C-M-d" . delete-sexp)
 
+   ;; C-<..> conflicts with emacs backward/fwd-sexp
+   ;; use alt instead; bound to right alt key
+   ("A-<right>" . sp-forward-slurp-sexp)
+   ("A-<left>"  . sp-backward-slurp-sexp)
+
+   ;; M-<..> conflicts with org table
+   ;; ("M-<right>" . sp-forward-barf-sexp)
+   ;; ("M-<left>"  . sp-backward-barf-sexp)
+ 
    ("M-[" . sp-backward-unwrap-sexp)
-   ("M-]" . sp-unwrap-sexp)
+   ("M-]" . sp-unwrap-sexp))
 
-   ("C-c ("  . wrap-with-parens)
-   ("C-c ["  . wrap-with-brackets)
-   ("C-c {"  . wrap-with-braces)
-   ("C-c '"  . wrap-with-single-quotes)
-   ("C-c \"" . wrap-with-double-quotes)
-   ("C-c _"  . wrap-with-underscores)
-   ("C-c `"  . wrap-with-back-quotes))
+  ;; disable to avoid conflicts
+  ;; (defmacro def-pairs (pairs)
+  ;;   ;; Define functions for pairing. PAIRS is an alist of (NAME . STRING)
+  ;;   ;; conses, where NAME is the function name that will be created and
+  ;;   ;; STRING is a single-character string that marks the opening character.
+
+  ;;   ;;   (def-pairs ((paren . \"(\")
+  ;;   ;;               (bracket . \"[\"))
+
+  ;;   ;; defines the functions WRAP-WITH-PAREN and WRAP-WITH-BRACKET,
+  ;;   ;; respectively.
+  ;;   `(progn
+  ;;      ,@(loop for (key . val) in pairs
+  ;;              collect
+  ;;              `(defun ,(read (concat
+  ;;                              "wrap-with-"
+  ;;                              (prin1-to-string key)
+  ;;                              "s"))
+  ;;                   (&optional arg)
+  ;;                 (interactive "p")
+  ;;                 (sp-wrap-with-pair ,val)))))
+
+  ;; (def-pairs ((paren . "(")
+  ;;             (bracket . "[")
+  ;;             (brace . "{")
+  ;;             (single-quote . "'")
+  ;;             (double-quote . "\"")
+  ;;             (back-quote . "`")))
+
+  ;; (bind-keys
+  ;;  ("C-c ("  . wrap-with-parens)
+  ;;  ("C-c ["  . wrap-with-brackets)
+  ;;  ("C-c {"  . wrap-with-braces)
+  ;;  ("C-c '"  . wrap-with-single-quotes)
+  ;;  ("C-c \"" . wrap-with-double-quotes)
+  ;;  ("C-c _"  . wrap-with-underscores)
+  ;;  ("C-c `"  . wrap-with-back-quotes))
   )
 
 ;; (use-package beacon
