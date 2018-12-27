@@ -1,0 +1,2 @@
+#+STARTUP: content
+#+OPTIONS: num:nil toc:nil \n:nil @:t ::t |:t ^:nil -:t f:nil *:t <:t ':nil

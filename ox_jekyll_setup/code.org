@@ -1,0 +1,8 @@
+#+STARTUP: content
+#+PROPERTY: header-args :exports code :results value code :eval never
+#+OPTIONS: toc:nil num:2 f:t ^:nil \n:t
+#+OPTIONS: @:t ::t |:t ^:nil -:t *:t <:t ':nil
+#+OPTIONS: author:nil
+#+OPTIONS: email:nil
+#+OPTIONS: creator:nil
+#+OPTIONS: timestamp:nil
