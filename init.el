@@ -217,6 +217,9 @@
      (haskell . t)
      (C . t)))
 
+  (setq org-list-demote-modify-bullet
+	'(("+" . "-") ("-" . "+") ("*" . "+")))
+  
   ;; initial settings
   ;; key bindings
   (global-set-key "\C-cl" 'org-store-link)
