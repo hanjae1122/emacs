@@ -275,22 +275,6 @@
   ;; export apostrophes correctly
   (setq org-export-with-smart-quotes t)
 
-  ;; LATEX export: start each heading on new page
-  ;; (defun org/get-headline-string-element  (headline backend info)
-  ;;   (let ((prop-point (next-property-change 0 headline)))
-  ;;     (if prop-point (plist-get (text-properties-at prop-point headline) :parent))))
-
-  ;; (defun org/ensure-latex-clearpage (headline backend info)
-  ;;   (when (org-export-derived-backend-p backend 'latex)
-  ;;     (let ((elmnt (org/get-headline-string-element headline backend info)))
-  ;; 	(when (member "newpage" (org-element-property :tags elmnt))
-  ;; 	  (concat "\\clearpage\n" headline)))))
-
-  ;; (eval-after-load 'ox
-  ;; '(progn
-  ;;    (add-to-list 'org-export-filter-headline-functions
-  ;;                 'my-html-filter-headline-yesdot)))
-  
   ;; set export backends (added beamer)
   (setq org-export-backends (quote (ascii beamer html icalendar latex odt)))
   )
