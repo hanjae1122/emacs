@@ -396,17 +396,16 @@
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-items '((recents  . 5)
-                        (bookmarks . 5)
                         (projects . 5)
-                        (agenda . 5)
-                        (registers . 5))))
+                        (agenda . 5)))
+  (setq show-week-agenda-p t)
+  )
 
 (use-package company)
 
 (use-package smartparens-config
-  :hook (prog-mode . smartparens-mode)
+  ;; :hook (prog-mode . smartparens-mode)
   :ensure smartparens
   :config
   ;; (smartparens-global-mode t)
