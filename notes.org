@@ -1,50 +1,75 @@
-| Mode        | KBD               | FXN                           |
-|-------------+-------------------+-------------------------------|
-| windmove    | Shift arrow       | move across buffers           |
-| hideshow    | C-c +             | toggle hide/show              |
-|             | C-c \             | toggle entirely               |
-| undo-tree   | C-(/ or ?)        | undo or redo                  |
-|             | C-x u             | visualize                     |
-|             | d or t or q       | diff/timestamp/quit           |
-|             | C-x r (u or U)    | save/restore state            |
-| crux        | Shift Ret         | open line                     |
-|             | C-<bckspc>        | kill back                     |
-|             | C-c n             | delete whtspc                 |
-|             | C-c n             | clean region                  |
-| projectile  | C-c p f           | jump to file                  |
-|             | C-c p d           | jump to dir                   |
-|             | C-c p b           | list local buffers            |
-|             | C-c p e           | jump to recent                |
-|             | C-c p g s         | grep                          |
-|             | C-c p o           | multi-occur                   |
-|             | C-c p r           | text replace                  |
-|             | C-c p p           | switch project                |
-|             | C-c p c           | compile                       |
-|             | C-c p a           | switch cpp <-> h              |
-| smartparens | C-M-spc <WRAPPER> | wrap exp with WRAPPER         |
-|             | C-M-a             | sp-beginning-of-sexp          |
-|             | C-M-e             | sp-end-of-sexp                |
-|             |                   |                               |
-|             | C-M-f             | sp-forward-sexp               |
-|             | C-M-b             | sp-backward-sexp              |
-|             |                   |                               |
-|             | C-M-n             | sp-next-sexp                  |
-|             | C-M-p             | sp-previous-sexp              |
-|             |                   |                               |
-|             | C-S-f             | sp-forward-symbol             |
-|             | C-S-b             | sp-backward-symbol            |
-|             |                   |                               |
-|             | C-M-t             | sp-transpose-sexp             |
-|             | C-M-k             | sp-kill-sexp                  |
-|             | C-M-w             | sp-copy-sexp                  |
-|             |                   |                               |
-|             | M-[               | sp-backward-unwrap-sexp       |
-|             | M-]               | sp-unwrap-sexp                |
-|             |                   |                               |
-|             | C-<right>         | sp-forward-slurp-sexp         |
-|             | M-<right>         | sp-forward-barf-sexp          |
-|             | C-<left>          | sp-backward-slurp-sexp        |
-|             | M-<left>          | sp-backward-barf-sexp         |
+#+STARTUP: showall
+
+* The important shortcuts
+| Mode        | KBD               | FXN                                  |
+|-------------+-------------------+--------------------------------------|
+| windmove    | Shift arrow       | move across buffers                  |
+| undo-tree   | C-x u             | visualize                            |
+| crux        | Shift Ret         | open line                            |
+| smartparens | C-M-spc <WRAPPER> | wrap exp with WRAPPER                |
+|             | M-[               | sp-backward-unwrap-sexp              |
+|             | M-]               | sp-unwrap-sexp                       |
+|             | A-<right>         | sp-forward-slurp-sexp                |
+| easy-kill   | +/-               | Expand/shrink selection              |
+|             | M-w w             | save word at point                   |
+|             | M-w s             | save sexp at point                   |
+|             | M-w l             | save list at point  (enclosing sexp) |
+
+* Shortcuts
+| Mode        | KBD               | FXN                                       |
+|-------------+-------------------+-------------------------------------------|
+| windmove    | Shift arrow       | move across buffers                       |
+| hideshow    | C-c +             | toggle hide/show                          |
+|             | C-c \             | toggle entirely                           |
+| undo-tree   | C-(/ or ?)        | undo or redo                              |
+|             | C-x u             | visualize                                 |
+|             | d or t or q       | diff/timestamp/quit                       |
+|             | C-x r (u or U)    | save/restore state                        |
+| crux        | Shift Ret         | open line                                 |
+|             | C-<bckspc>        | kill back                                 |
+|             | C-c n             | delete whtspc                             |
+|             | C-c n             | clean region                              |
+| projectile  | C-c p f           | jump to file                              |
+|             | C-c p d           | jump to dir                               |
+|             | C-c p b           | list local buffers                        |
+|             | C-c p e           | jump to recent                            |
+|             | C-c p g s         | grep                                      |
+|             | C-c p o           | multi-occur                               |
+|             | C-c p r           | text replace                              |
+|             | C-c p p           | switch project                            |
+|             | C-c p c           | compile                                   |
+|             | C-c p a           | switch cpp <-> h                          |
+| smartparens | C-M-spc <WRAPPER> | wrap exp with WRAPPER                     |
+|             | C-M-a             | sp-beginning-of-sexp                      |
+|             | C-M-e             | sp-end-of-sexp                            |
+|             |                   |                                           |
+|             | C-M-f             | sp-forward-sexp                           |
+|             | C-M-b             | sp-backward-sexp                          |
+|             |                   |                                           |
+|             | C-M-n             | sp-next-sexp                              |
+|             | C-M-p             | sp-previous-sexp                          |
+|             |                   |                                           |
+|             | C-S-f             | sp-forward-symbol                         |
+|             | C-S-b             | sp-backward-symbol                        |
+|             |                   |                                           |
+|             | C-M-t             | sp-transpose-sexp                         |
+|             | C-M-k             | sp-kill-sexp                              |
+|             | C-M-w             | sp-copy-sexp                              |
+|             |                   |                                           |
+|             | M-[               | sp-backward-unwrap-sexp                   |
+|             | M-]               | sp-unwrap-sexp                            |
+|             |                   |                                           |
+|             | A-<right>         | sp-forward-slurp-sexp                     |
+|             | M-<right>         | sp-forward-barf-sexp                      |
+|             | A-<left>          | sp-backward-slurp-sexp                    |
+|             | M-<left>          | sp-backward-barf-sexp                     |
+| easy-kill   | M-w w             | save word at point                        |
+|             | M-w s             | save sexp at point                        |
+|             | M-w l             | save list at point  (enclosing sexp)      |
+|             | M-w d             | save defun at point                       |
+|             | M-w D             | save current defun name                   |
+|             | M-w f             | save file at point                        |
+|             | M-w b             | save buffe-file-name or default-directory |
 
 * Org tables
 - Use C-c ` to edit inside hidden cells

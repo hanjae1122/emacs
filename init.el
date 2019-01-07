@@ -476,6 +476,14 @@
 (use-package command-log-mode)
 
 (use-package fireplace)
+
+(use-package yaml-mode)
+
+(use-package easy-kill
+  :config
+  (global-set-key [remap kill-ring-save] #'easy-kill)
+  (global-set-key [remap mark-sexp] #'easy-mark))
+
 ;; ====================================================================================
 ;; ====================================================================================
 ;; ====================================================================================
@@ -492,10 +500,12 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#f0f0f0" "#50a14f"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#f0f0f0" "#9ca0a4"))
  '(nyan-mode t)
- '(org-agenda-files (quote ("~/org/tasks.org")))
+ '(org-agenda-files
+   (quote
+    ("~/hanjae1122.github.io/org/_posts/2018-12-26-c++-notes.org" "~/org/tasks.org")))
  '(package-selected-packages
    (quote
-    (fireplace command-log-mode ess smartparens-config org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
+    (easy-kill yaml-mode fireplace command-log-mode ess smartparens-config org-pdfview swiper company-ghc counsel hindent beacon smartparens dashboard smex doom-themes popup-kill-ring browse-kill-ring crux dimmer undo-tree linum-relative rainbow-delimiters nyan-mode haskell-mode eimp pdf-tools magit projectile flycheck elpy exec-path-from-shell ace-window use-package)))
  '(projectile-mode t nil (projectile))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
