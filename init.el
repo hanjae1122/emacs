@@ -320,19 +320,8 @@
   :hook ((python-mode . elpy-mode)
 	 (python-mode . visual-line-mode))
   :config
-  ;; (pyvenv-workon "py3-Egm4BeYe")
   ;; remove warning
   (setq python-shell-completion-native-enable nil)
-  ;; use Ipython interpreter
-  (setq python-shell-interpreter "ipython"
-  	python-shell-interpreter-args "-i --simple-prompt")
-  ;; (setq python-shell-interpreter "jupyter"
-  ;; 	python-shell-interpreter-args "console --simple-prompt"
-  ;; 	python-shell-prompt-detect-failure-warning nil)
-  ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
-  ;; 	       "jupyter")
-  ;; ;; disable flymake (use flycheck)
-  ;; (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   )
 
 (use-package projectile
