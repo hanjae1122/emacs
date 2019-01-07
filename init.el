@@ -379,12 +379,13 @@
 (use-package crux
   :config
   (global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
-  (global-set-key (kbd "C-c o") #'crux-open-with)
-  (global-set-key [(shift return)] #'crux-smart-open-line)
+  ;; (global-set-key (kbd "C-c o") #'crux-open-with)
+  ;; (global-set-key [(shift return)] #'crux-smart-open-line)
   (global-set-key (kbd "C-<backspace>") #'crux-kill-line-backwards)
-  (global-set-key [remap kill-whole-line] #'crux-smart-kill-line)
-  ;; (global-set-key [remap kill-whole-line] #'crux-kill-whole-line)
-  (global-set-key (kbd "C-c n") #'crux-cleanup-buffer-or-region))
+  ;; (global-set-key [remap kill-whole-line] #'crux-smart-kill-line)
+  (global-set-key [remap kill-whole-line] #'crux-kill-whole-line)
+  ;; (global-set-key (kbd "C-c n") #'crux-cleanup-buffer-or-region)
+  )
 
 
 (use-package popup-kill-ring
