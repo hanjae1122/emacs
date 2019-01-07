@@ -181,19 +181,9 @@
 
 
 ;; Themes
-(use-package dracula-theme
-  :load-path "themes/dracula-theme"
-  :config
-  ;; (load-theme 'dracula t)
-  )
-
 (use-package spacemacs-dark-theme
   :load-path "themes/spacemacs-theme"
   )
-
-;; disabled due to conflict with ox-jekyll
-;; (use-package doom-themes
-;;   )
 
 ;; Package specifics
 (use-package ace-window
