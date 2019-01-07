@@ -438,6 +438,11 @@
 
    ("M-[" . sp-backward-unwrap-sexp)
    ("M-]" . sp-unwrap-sexp))
+
+   ;; C-<..> conflicts with emacs backward/fwd-sexp
+   ;; use alt instead; bound to right alt key
+   ("A-<right>" . sp-forward-slurp-sexp)
+   ("A-<left>"  . sp-backward-slurp-sexp)
   )
 
 ;; (use-package beacon
