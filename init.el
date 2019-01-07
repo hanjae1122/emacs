@@ -285,7 +285,7 @@
 
 ;; Octopress with jekyll
 (use-package org-octopress
-  :after org
+  :ensure org
   :ensure orglue :ensure ctable
   :load-path "~/.emacs.d/raw/org-octopress/"
   :config
@@ -293,24 +293,10 @@
   (setq org-octopress-directory-posts     "~/hanjae1122.github.io/_posts")
   (setq org-octopress-directory-org-top   "~/hanjae1122.github.io/org")
   (setq org-octopress-directory-org-posts "~/hanjae1122.github.io/org/_posts")
-  (setq org-octopress-setup-file          "~/.emacs.d/ox_jekyll_setupfile.org")
+  (setq org-octopress-setup-file          "~/.emacs.d/ox_jekyll_setupfile/page.org")
 
-  ;; need to change org links to match website structure
-  ;; we use permalink in _config.yml to fix path depth and use relative paths
-  
-  ;; another way is to add custom links but this disables ATTR_HTML, texted links etc
-  ;; ;; checkout https://www.mfoot.com/blog/2015/11/17/using-org-mode-to-write-jekyll-blogs/
-  ;; ;; and https://stackoverflow.com/questions/14684263/how-to-org-mode-image-absolute-path-of-export-html
-  ;;  (defun org-custom-link-img-follow (path)
-  ;;    (org-open-file-with-emacs
-  ;;     (format "../files/image/%s" path)))
-
-  ;;  (defun org-custom-link-img-export (path desc format)
-  ;;    (cond
-  ;;     ((eq format 'html)
-  ;;      (format "<img src=\"/files/image/%s\" alt=\"%s\"/>" path desc))))
-
-  ;;  (org-add-link-type "img" 'org-custom-link-img-follow 'org-custom-link-img-export)
+  ;; use provided css as stylesheet
+  (setq org-html-htmlize-output-type 'css)  
   )
 
 (use-package org-pdfview
